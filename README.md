@@ -40,8 +40,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Add solution URL here](https://www.frontendmentor.io/solutions/multi-step-form-using-reacttailwindcss-HekV7GInUt)
+- Live Site URL: [My live site URL](https://neon-biscochitos-2bd5ee.netlify.app/)
 
 ## My process
 
@@ -81,7 +81,6 @@ I am looking forward to improve the performance of my react apps and get rid of 
 
 ## Author
 
-- Website - [AmirBnsL](https://neon-biscochitos-2bd5ee.netlify.app/)
 - Frontend Mentor - [@AmirBnsL](https://www.frontendmentor.io/profile/AmirBnsL)
 
 
