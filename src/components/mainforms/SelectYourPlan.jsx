@@ -12,7 +12,7 @@ function PlanCard({ PlanType, type, onClickHandler,data }) {
       className={` cursor-pointer rPlanCard px-4 h-44 sm:h-20 sm:justify-start sm:gap-4 sm:items-center w-36 sm:w-11/12  flex flex-col sm:flex-row justify-around ${PlanType.Name===data.type || onLoadSelection() ? 'border-PurplishBlue bg-Magnolia' : ''} active:bg-Magnolia rounded-lg hover:border-PurplishBlue active:border-PurplishBlue border-[1px] hover:border-[1px] transition-all ease-in-out `}
       onClick={onClickHandler}
     >
-      <img
+      <img  
         src={`/assets/images/icon-${PlanType.Name.toLowerCase()}.svg`}
         alt={`${PlanType.Name} image`}
         className="w-[40px] h-[40px]"
