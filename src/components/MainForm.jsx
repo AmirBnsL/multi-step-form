@@ -136,7 +136,7 @@ export default function MainForm({ page, setPage }) {
           onClick={() => {
             setPage((prevPage) => {
               switch (prevPage) {
-                case 1:
+                case 2:
                   if (data.type) {
                     return prevPage + 1;
                   } else {
@@ -144,7 +144,7 @@ export default function MainForm({ page, setPage }) {
                     return prevPage;
                   }
                   break;
-                case 2:
+                case 1:
                   setIsFilled({
                     isPhoneFilled:
                       containsOnlyNumbers(data.phone) && data.phone != "",
