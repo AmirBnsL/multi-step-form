@@ -43,9 +43,9 @@ function OptionCard({ data, setData, addonInfo }) {
         onClickHandler();
       }}
     >
-      <div className={`checkbox-container flex justify-between gap-4 items-center before:content-[''] before:w-5 before:h-5 group    before:border-2  ${Selected ? 'before:bg-PurplishBlue hover:before:bg-PurplishBlue CheckMark':'hover:before:bg-PastelBlue group-hover:before:bg-PastelBlue NoCheckMark'}`}>
-          <input checked={isOnLoadSelected()} id={addonInfo.title} type="checkbox" className={`checkbox cursor-pointer opacity-0 absolute`} />
-        <label htmlFor={addonInfo.title} className="checkmark cursor-pointer  ">
+      <div className={`checkbox-container flex justify-between gap-4 items-center before:content-[''] before:w-5 before:h-5 group    before:border-2  ${Selected ||isOnLoadSelected()? 'before:bg-PurplishBlue hover:before:bg-PurplishBlue CheckMark':'hover:before:bg-PastelBlue group-hover:before:bg-PastelBlue NoCheckMark'}`}>
+          <input checked={isOnLoadSelected()} type="checkbox" className={`checkbox cursor-pointer opacity-0 absolute`} />
+        <label  className="checkmark cursor-pointer  ">
           <h2 className="font-bold text-MarineBlue sm:text-sm">
             {addonInfo.title}
           </h2>

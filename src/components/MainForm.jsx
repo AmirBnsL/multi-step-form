@@ -107,6 +107,7 @@ export default function MainForm({ page, setPage }) {
     isPhoneFilled: true,
     isEmailFilled: true,
   });
+  console.log(data,Object.keys(data.type).length)
   return (
     <div className=" flex flex-col justify-between gap-4 sm:gap-0  sm:h-full sm:w-screen sm:translate-y-[-10%]">
       {pickMainform(page)}
@@ -137,7 +138,7 @@ export default function MainForm({ page, setPage }) {
             setPage((prevPage) => {
               switch (prevPage) {
                 case 2:
-                  if (data.type) {
+                  if (!(Object.keys(data.type).length===0)) {
                     return prevPage + 1;
                   } else {
                     alert("Please choose a Plan ");
