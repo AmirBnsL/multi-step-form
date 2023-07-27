@@ -1,45 +1,89 @@
 import React, { useState } from "react";
 
 
-function OptionCard ({title,desc,price,data,setData}) {
-   const [Selected,setSelected]=useState(false);
-    const pushAddon = (addon,data) => {
-    setData({
-      ...data,
-      addons: [...data.addons, addon],
-    });
-  }; 
+function OptionCard({ data, setData, addonInfo }) {
+  const [Selected, setSelected] = useState(false);
+
+  const onClickHandler = () => {
+    if (!Selected) {
+      setData({
+        ...data,
+        addons: [...data.addons, addonInfo],
+        price:
+          +data.price +
+          +(data.schedule === "monthly"
+            ? addonInfo.price
+            : addonInfo.price * 10),
+      });
+      /*                  setData({...data,price:+data.price + +(data.schedule=='monthly' ? price : price*10)});
+       */
+    } else {
+      setData({
+        ...data,
+        price:
+          +data.price -
+          +(data.schedule === "monthly"
+            ? addonInfo.price
+            : addonInfo.price * 10),
+        addons: data.addons.filter((item) => item.title !== addonInfo.title),
+      });
+    }
+  };
+  const isOnLoadSelected = () => {
+    return data.addons.some((element) => addonInfo.title == element.title);
+  };
   
-    return <div className={`flex justify-between gap-2 p-4 rounded border-2 border-CoolGray hover:bg-LightBlue ${Selected ? 'bg-LightBlue' :''} checked:transition-all ease-in-out  w-full`} >
-        <div className="flex justify-between gap-4 items-center">
-            <input type="checkbox" className="" onClick={()=>{ setSelected(!Selected);
-            if (!Selected) {
-                pushAddon(title,data); 
-                setData({...data,price:+data.price + +(data.schedule=='monthly' ? price : price*10)});
-            }
-             }}/>
-        <div >
-        <h2 className="font-bold text-MarineBlue">{title}</h2>
-        <p className="text-CoolGray font-medium text-sm">{desc}</p>
-        </div>
-        </div>
-        <p> {true ?`+${price}/month` : `+${price *10}/year`}</p>
+  return (
+    <div
+      className={`flex group justify-between cursor-pointer gap-2 p-4 rounded border-2 border-CoolGray hover:bg-LightBlue ${
+        Selected || isOnLoadSelected() ? "bg-LightBlue" : ""
+      } checked:transition-all ease-in-out  w-full`}
+      onClick={() => {
+        setSelected(!Selected);
+        onClickHandler();
+      }}
+    >
+      <div className={`checkbox-container flex justify-between gap-4 items-center before:content-[''] before:w-5 before:h-5 group    before:border-2  ${Selected ? 'before:bg-PurplishBlue hover:before:bg-PurplishBlue CheckMark':'hover:before:bg-PastelBlue group-hover:before:bg-PastelBlue NoCheckMark'}`}>
+          <input checked={isOnLoadSelected()} id={addonInfo.title} type="checkbox" className={`checkbox cursor-pointer opacity-0 absolute`} />
+        <label htmlFor={addonInfo.title} className="checkmark cursor-pointer  ">
+          <h2 className="font-bold text-MarineBlue sm:text-sm">
+            {addonInfo.title}
+          </h2>
+          <p className="text-CoolGray font-medium text-sm sm:text-xs">
+            {addonInfo.desc}
+          </p>
+        </label>
+      </div>
+      <p className="text-PurplishBlue font-bold sm:text-xs self-center ">
+        {" "}
+        {data.schedule=='monthly' ? `+${addonInfo.price}/mo` : `+${addonInfo.price * 10}/yr`}
+      </p>
     </div>
+  );
 }
-export default function PickAddons({data,setData}){
-    console.log(data);
-    return <div className="Pick-Addons">
-        <h1 className="text-3xl mt-12 mb-2 font-bold text-MarineBlue">
-            Pick add-ons
-        </h1>
-        <p className="text-sm text-CoolGray font-medium mb-10">
-            Add-ons help enhance your gaming experience. 
-        </p>
-        <div className="flex flex-col gap-4">
-            <OptionCard title={'Online service'} desc={'Access to multiplayer games'} price={'1'} data={data} setData={setData}></OptionCard>
-            <OptionCard title={'Larger storage'} desc={'Extra 1TB of cloud save'} price={'2'} data={data} setData={setData}></OptionCard>
-            <OptionCard title={'Customizable profile'} desc={'Custom theme on your profile'} price={'2'} data={data} setData={setData}></OptionCard>
-        </div>
-        
+
+export default function PickAddons({ data, setData, addons }) {
+  console.log(data);
+
+  return (
+    <div className="Pick-Addons w-full px-5 sm:py-0 sm:pb-10 sm:justify-center sm:self-center sm:w-11/12 sm:rounded-lg sm:bg-Alabaster">
+      <h1 className="text-3xl sm:w-11/12 sm:text-xl  sm:min-w-[92%] sm:self-center sm:rounded-lg mt-12 mb-2  font-bold text-MarineBlue">
+        Pick add-ons
+      </h1>
+      <p className="text-sm text-CoolGray font-medium mb-10">
+        Add-ons help enhance your gaming experience.
+      </p>
+      <div className="flex flex-col gap-4">
+        {addons.map((addon) => {
+          return (
+            <OptionCard
+              addonInfo={addon}
+              data={data}
+              setData={setData}
+            ></OptionCard>
+          );
+        })}
+      </div>
     </div>
+  );
 }
