@@ -13,7 +13,7 @@ function PlanCard({ PlanType, type, onClickHandler,data }) {
       onClick={onClickHandler}
     >
       <img
-        src={`./../../assets/images/icon-${PlanType.Name.toLowerCase()}.svg`}
+        src={`assets/images/icon-${PlanType.Name.toLowerCase()}.svg`}
         alt={`${PlanType.Name} image`}
         className="w-[40px] h-[40px]"
       />
